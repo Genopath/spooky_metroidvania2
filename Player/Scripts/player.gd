@@ -3,16 +3,20 @@ class_name Player extends CharacterBody2D
 const DEBUG_JUMP_INDICATOR = preload("res://Player/debug_jump_indicator.tscn")
 
 #region /// On-ready Variables
-
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $PlayerSheet
+#@onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_stand: CollisionShape2D = $CollisionStand
 @onready var collision_crouch: CollisionShape2D = $CollisionCrouch
+@onready var one_way_platform_ray_cast: RayCast2D = $OneWayPlatformRayCast
+@onready var one_way_platform_shape_cast: ShapeCast2D = $OneWayPlatformShapeCast
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 #endregion
 
 #region /// Export Variables
 
 @export var move_speed : float = 150.0
+@export var max_fall_velocity : float = 600
 
 #endregion
 
@@ -51,6 +55,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	velocity.y += gravity * _delta * gravity_multiplier
+	velocity.y = clampf( velocity.y, -1000.0, max_fall_velocity )
 	move_and_slide()
 	change_state( current_state.physics_process( _delta ) )
 	pass
@@ -93,14 +98,25 @@ func change_state( new_state : PlayerState ) -> void:
 	pass
 
 func update_direction() -> void:
-	#var prev_direction : Vector2 = direction
+	var prev_direction : Vector2 = direction
 	
 	var x_axis = Input.get_axis("left", "right")
 	var y_axis = Input.get_axis("up", "down")
 	direction = Vector2(x_axis, y_axis)	
-	# do more stuff?
-	pass
+	
+	if prev_direction.x != direction.x:
+		if direction.x < 0:
+			sprite.flip_h = true
+			collision_crouch.position.x = 0
+			#collision_stand.position.x = 4
+			one_way_platform_shape_cast.position.x = 4
+		elif direction.x > 0:
+			sprite.flip_h = false
+			collision_crouch.position.x = 4
+			#collision_stand.position.x = 0
+			one_way_platform_shape_cast.position.x = 0
 
+	pass
 func add_debug_indicator( color : Color = Color.RED ) -> void:
 	var d : Node2D =  DEBUG_JUMP_INDICATOR.instantiate()
 	get_tree().root.add_child( d )

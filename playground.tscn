@@ -123,6 +123,8 @@ scale = Vector2(1.53836, 0.237213)
 texture = SubResource("GradientTexture2D_wt17y")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="OneWayPlatform"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatform/StaticBody2D"]
 position = Vector2(-7.7486e-07, 2.02656e-06)
@@ -131,4 +133,4 @@ shape = SubResource("RectangleShape2D_m8u5f")
 one_way_collision = true
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
-position = Vector2(238, -540)
+position = Vector2(247, -504)

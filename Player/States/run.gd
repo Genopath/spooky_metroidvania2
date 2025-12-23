@@ -14,6 +14,7 @@ func init() -> void:
 # What happens when we enter this state?
 func enter() -> void:
 	# play animation
+	player.animation_player.play("walk")
 	pass
 
 # What happens when we exit this state?

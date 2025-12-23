@@ -1,15 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://clpjnc78yc321"]
+[gd_scene load_steps=10 format=3 uid="uid://clpjnc78yc321"]
 
 [ext_resource type="Script" uid="uid://0vx0wm0kntqg" path="res://Player/Scripts/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://kcstyb507tsw" path="res://Player/States/idle.gd" id="2_btcbx"]
 [ext_resource type="Script" uid="uid://cdehxmycwobw" path="res://Player/States/run.gd" id="3_gwnis"]
 [ext_resource type="Script" uid="uid://d4bp41c3lea14" path="res://Player/States/jump.gd" id="4_gwnis"]
+[ext_resource type="Script" uid="uid://bo56nwocd13pi" path="res://Player/States/fall.gd" id="5_k53q1"]
+[ext_resource type="Script" uid="uid://bdckpy6qggvua" path="res://Player/States/crouch.gd" id="6_fhl08"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hvfyp"]
 size = Vector2(18, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8h54"]
 size = Vector2(16, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhl08"]
+size = Vector2(16, 30)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_l8h54")
@@ -18,9 +23,14 @@ script = ExtResource("1_l8h54")
 position = Vector2(0, -24)
 texture = SubResource("PlaceholderTexture2D_hvfyp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionStand" type="CollisionShape2D" parent="."]
 position = Vector2(0, -23)
 shape = SubResource("RectangleShape2D_l8h54")
+
+[node name="CollisionCrouch" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_fhl08")
+disabled = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = -33.0
@@ -44,3 +54,11 @@ script = ExtResource("3_gwnis")
 [node name="Jump" type="Node" parent="States"]
 unique_name_in_owner = true
 script = ExtResource("4_gwnis")
+
+[node name="Fall" type="Node" parent="States"]
+unique_name_in_owner = true
+script = ExtResource("5_k53q1")
+
+[node name="Crouch" type="Node" parent="States"]
+unique_name_in_owner = true
+script = ExtResource("6_fhl08")

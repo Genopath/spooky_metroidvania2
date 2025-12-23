@@ -1,9 +1,18 @@
 class_name Player extends CharacterBody2D
 
+const DEBUG_JUMP_INDICATOR = preload("res://Player/debug_jump_indicator.tscn")
+
+#region /// On-ready Variables
+
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var collision_stand: CollisionShape2D = $CollisionStand
+@onready var collision_crouch: CollisionShape2D = $CollisionCrouch
+
+#endregion
+
 #region /// Export Variables
 
 @export var move_speed : float = 150.0
-@export var jump_force: float = 350.0
 
 #endregion
 
@@ -21,6 +30,7 @@ var previous_state : PlayerState :
 
 var direction :  Vector2 = Vector2.ZERO
 var gravity : float = 980
+var gravity_multiplier : float = 1.0
 
 #endregion
 
@@ -40,7 +50,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func _physics_process(_delta: float) -> void:
-	velocity.y += gravity * _delta
+	velocity.y += gravity * _delta * gravity_multiplier
 	move_and_slide()
 	change_state( current_state.physics_process( _delta ) )
 	pass
@@ -89,4 +99,13 @@ func update_direction() -> void:
 	var y_axis = Input.get_axis("up", "down")
 	direction = Vector2(x_axis, y_axis)	
 	# do more stuff?
+	pass
+
+func add_debug_indicator( color : Color = Color.RED ) -> void:
+	var d : Node2D =  DEBUG_JUMP_INDICATOR.instantiate()
+	get_tree().root.add_child( d )
+	d.global_position = global_position
+	d.modulate = color
+	await get_tree().create_timer( 3.0 ).timeout
+	d.queue_free()
 	pass

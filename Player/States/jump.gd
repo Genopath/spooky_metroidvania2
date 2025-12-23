@@ -1,5 +1,7 @@
 class_name PlayerStateJump extends PlayerState
 
+@export var jump_velocity : float = 450.0
+
 #region /// state references
 # reference to all other states
 @onready var states: Node = $".."
@@ -12,31 +14,33 @@ func init() -> void:
 # What happens when we enter this state?
 func enter() -> void:
 	# Apply jump force
-	player.velocity.y = -player.jump_force
+	player.add_debug_indicator( Color.LIME_GREEN )
+	player.velocity.y = -jump_velocity
 	# play jump animation
 	pass
 
 # What happens when we exit this state?
 func exit() -> void:
+	player.add_debug_indicator( Color.YELLOW )
 	pass
 
 # What happens when an input is pressed?
-func handle_input( _event : InputEvent ) -> PlayerState:
+func handle_input( event : InputEvent ) -> PlayerState:
+	if event.is_action_released("jump"):
+		player.velocity.y *= 0.5
+		return fall
 	return next_state
 
 # What happens each process tick in this state?
 func process(_delta: float) -> PlayerState:
-	# Check if we've landed (touching ground)
-	if player.is_on_floor():
-		if player.direction.x != 0:
-			return run
-		else:
-			return idle
-	
 	return next_state
 
 # What happens each physics process tick in this state?
 func physics_process(_delta: float) -> PlayerState:
 	# Allow horizontal movement in air
+	if player.is_on_floor():
+		return idle
+	elif player.velocity.y >= 0:
+		return fall
 	player.velocity.x = player.direction.x * player.move_speed
 	return next_state

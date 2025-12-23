@@ -1,14 +1,9 @@
-class_name PlayerState extends Node
-
-var player : Player
-var next_state : PlayerState
+class_name PlayerStateRun extends PlayerState
 
 #region /// state references
 
 # reference to all other states
-@onready var idle: PlayerStateIdle = %Idle
-@onready var run: PlayerStateRun = %Run
-@onready var jump: PlayerStateJump = %Jump
+@onready var states: Node = $".."
 
 #endregion
 
@@ -18,6 +13,7 @@ func init() -> void:
 
 # What happens when we enter this state?
 func enter() -> void:
+	# play animation
 	pass
 
 # What happens when we exit this state?
@@ -26,12 +22,17 @@ func exit() -> void:
 
 # What happens when an input is pressed?
 func handle_input( _event : InputEvent ) -> PlayerState:
+	if _event.is_action_pressed("jump") and player.is_on_floor():
+		return jump
 	return next_state
 
 # What happens each process tick in this state?
 func process(_delta: float) -> PlayerState:
-	return next_state
+	if player.direction.x == 0:
+		return idle
+	return null
 
 # What happens each physics process tick in this state?
 func physics_process(_delta: float) -> PlayerState:
+	player.velocity.x = player.direction.x * player.move_speed
 	return next_state

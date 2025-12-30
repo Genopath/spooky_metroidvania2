@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 const DEBUG_JUMP_INDICATOR = preload("res://Player/debug_jump_indicator.tscn")
 
 #region /// On-ready Variables
+
 @onready var sprite: Sprite2D = $PlayerSheet
 #@onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_stand: CollisionShape2D = $CollisionStand

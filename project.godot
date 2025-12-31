@@ -14,6 +14,10 @@ config/name="Spooky_Metroidvania"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SceneManager="*res://00_Global/Scene_Manager/Scene_Manager.tscn"
+
 [display]
 
 window/size/viewport_width=480
@@ -21,6 +25,10 @@ window/size/viewport_height=270
 window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="canvas_items"
+
+[global_group]
+
+Player=""
 
 [input]
 

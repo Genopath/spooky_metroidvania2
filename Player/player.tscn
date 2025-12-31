@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://clpjnc78yc321"]
+[gd_scene load_steps=19 format=3 uid="uid://clpjnc78yc321"]
 
 [ext_resource type="Script" uid="uid://0vx0wm0kntqg" path="res://Player/Scripts/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://kcstyb507tsw" path="res://Player/States/idle.gd" id="2_btcbx"]
@@ -132,6 +132,19 @@ _data = {
 &"walk": SubResource("Animation_00tjw")
 }
 
+[sub_resource type="Gradient" id="Gradient_vtle1"]
+offsets = PackedFloat32Array(0, 0.3, 0.6, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.903281, 0.223786, 1, 0.615407, 0.0627853, 0.00416103, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_od3ui"]
+gradient = SubResource("Gradient_vtle1")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.2)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 16
 collision_mask = 3
@@ -204,3 +217,9 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, -39)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(2, -30)
+color = Color(1, 0.893268, 0.592071, 1)
+energy = 0.3
+texture = SubResource("GradientTexture2D_od3ui")

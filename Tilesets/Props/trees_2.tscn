@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://br7p2fn6b2xm2"]
+
+[ext_resource type="Texture2D" uid="uid://cuwg18ibqoprl" path="res://Tilesets/Props/tree_2.png" id="1_3i266"]
+
+[node name="Trees" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3i266")

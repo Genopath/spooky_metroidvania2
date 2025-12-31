@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://b0yynturcai0s"]
+
+[ext_resource type="Texture2D" uid="uid://bq6wisiop11in" path="res://Tilesets/001-forest/Sprite_Sheet-v1.png" id="1_s2wy6"]
+[ext_resource type="Script" uid="uid://m0qphkai4xb5" path="res://General/Scripts/light_flicker.gd" id="2_o7lum"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7lum"]
+atlas = ExtResource("1_s2wy6")
+region = Rect2(384, 224, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awp2o"]
+atlas = ExtResource("1_s2wy6")
+region = Rect2(416, 224, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47dj4"]
+atlas = ExtResource("1_s2wy6")
+region = Rect2(448, 224, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4q1w"]
+atlas = ExtResource("1_s2wy6")
+region = Rect2(480, 224, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xogu8"]
+atlas = ExtResource("1_s2wy6")
+region = Rect2(512, 224, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_le38l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7lum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awp2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47dj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4q1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xogu8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_vtle1"]
+offsets = PackedFloat32Array(0, 0.3, 0.6, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.903281, 0.223786, 1, 0.615407, 0.0627853, 0.00416103, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s2wy6"]
+gradient = SubResource("Gradient_vtle1")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.2)
+
+[node name="Animated_Fire" type="AnimatedSprite2D"]
+modulate = Color(0.493211, 0.493211, 0.493211, 1)
+sprite_frames = SubResource("SpriteFrames_le38l")
+autoplay = "default"
+frame_progress = 0.103236
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_s2wy6")
+script = ExtResource("2_o7lum")
+flicker_intensity = 0.1

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://q1vepa0cmyrr"]
+
+[ext_resource type="Shader" uid="uid://pd76v4tuhy6" path="res://Tilesets/Props/swaying_trees.tres" id="1_ub7v1"]
+[ext_resource type="Texture2D" uid="uid://dx2leinqrv7ox" path="res://Tilesets/Props/tree_1.png" id="2_shedg"]
+[ext_resource type="Texture2D" uid="uid://cuwg18ibqoprl" path="res://Tilesets/Props/tree_2.png" id="3_shedg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qogu0"]
+shader = ExtResource("1_ub7v1")
+shader_parameter/WindStrength2 = 2.0
+
+[node name="Trees" type="Node2D"]
+
+[node name="Tree_1" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qogu0")
+texture = ExtResource("2_shedg")
+
+[node name="Tree_2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qogu0")
+texture = ExtResource("3_shedg")

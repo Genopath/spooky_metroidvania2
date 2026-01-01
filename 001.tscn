@@ -268,7 +268,6 @@ z_index = 4
 material = SubResource("CanvasItemMaterial_uh5pc")
 position = Vector2(355, -603)
 rotation = 0.349066
-scale = Vector2(1, 1)
 texture = ExtResource("7_uh5pc")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Parallax2D2"]

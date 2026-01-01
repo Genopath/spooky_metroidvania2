@@ -12,6 +12,7 @@ const DEBUG_JUMP_INDICATOR = preload("res://Player/debug_jump_indicator.tscn")
 @onready var one_way_platform_shape_cast: ShapeCast2D = $OneWayPlatformShapeCast
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@onready var flashlight: Flashlight = $Flashlight
 #endregion
 
 #region /// Export Variables

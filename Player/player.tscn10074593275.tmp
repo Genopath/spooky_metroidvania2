@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://clpjnc78yc321"]
+[gd_scene load_steps=20 format=3 uid="uid://clpjnc78yc321"]
 
 [ext_resource type="Script" uid="uid://0vx0wm0kntqg" path="res://Player/Scripts/player.gd" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://kcstyb507tsw" path="res://Player/States/idle.gd" id="2_btcbx"]
@@ -7,9 +7,7 @@
 [ext_resource type="Script" uid="uid://bo56nwocd13pi" path="res://Player/States/fall.gd" id="5_k53q1"]
 [ext_resource type="Script" uid="uid://bdckpy6qggvua" path="res://Player/States/crouch.gd" id="6_fhl08"]
 [ext_resource type="Texture2D" uid="uid://qasocnuoqleh" path="res://Player/Sprites/player_sheet.png" id="7_vtle1"]
-[ext_resource type="Texture2D" uid="uid://cuwg18ibqoprl" path="res://Tilesets/Props/tree_2.png" id="8_x3vf3"]
-[ext_resource type="Texture2D" uid="uid://bycu867355y84" path="res://Tilesets/Props/Flashlight.png" id="9_00tjw"]
-[ext_resource type="Script" uid="uid://bydhnq0vidjvj" path="res://Player/Scripts/flashlight.gd" id="9_x3vf3"]
+[ext_resource type="Script" uid="uid://bydhnq0vidjvj" path="res://General/Scripts/flashlight.gd" id="8_od3ui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtle1"]
 size = Vector2(14, 3)
@@ -221,24 +219,13 @@ libraries = {
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2, -39)
 
-[node name="Flashlight" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(2, -30)
 color = Color(1, 0.893268, 0.592071, 1)
 energy = 0.3
 texture = SubResource("GradientTexture2D_od3ui")
-script = ExtResource("9_x3vf3")
-flashlight_energy = 0.5
-flashlight_range = 200.0
 
-[node name="test" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(70, 4)
-scale = Vector2(11.9844, 4.71181)
-texture = ExtResource("8_x3vf3")
-
-[node name="Flashlight_old" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(39, -22)
-scale = Vector2(0.0976968, 0.154538)
-color = Color(1, 0.967524, 0.822249, 1)
-texture = ExtResource("9_00tjw")
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.85301, 0.748794, 0.426505, 1)
+max_distance = 2029.0
+script = ExtResource("8_od3ui")

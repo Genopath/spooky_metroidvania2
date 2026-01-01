@@ -128,7 +128,6 @@ void vertex() {
 
 }
 "
-graph_offset = Vector2(-1076.84, 255.126)
 mode = 1
 flags/light_only = false
 preview_params/WindStrength = "0.0"

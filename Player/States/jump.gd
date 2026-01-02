@@ -59,6 +59,6 @@ func physics_process(_delta: float) -> PlayerState:
 
 
 func set_jump_frame() -> void:
-	var frame : float = remap(player.velocity.y, -jump_velocity, 0.0, 0.0, 0.2)
+	var frame : float = remap(player.velocity.y, -jump_velocity, 0.0, 0.0, 0.1)
 	player.animation_player.seek( frame, true )
 	pass

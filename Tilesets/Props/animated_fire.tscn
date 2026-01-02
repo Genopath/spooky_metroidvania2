@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0yynturcai0s"]
+[gd_scene load_steps=15 format=3 uid="uid://b0yynturcai0s"]
 
 [ext_resource type="Texture2D" uid="uid://bq6wisiop11in" path="res://Tilesets/001-forest/Sprite_Sheet-v1.png" id="1_s2wy6"]
 [ext_resource type="Script" uid="uid://m0qphkai4xb5" path="res://General/Scripts/light_flicker.gd" id="2_o7lum"]
@@ -43,7 +43,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 7.0
+"speed": 9.0
 }]
 
 [sub_resource type="Gradient" id="Gradient_vtle1"]
@@ -59,13 +59,47 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.2)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o7lum"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_o7lum"]
+offsets = PackedFloat32Array(0, 0.4, 0.681818, 1)
+colors = PackedColorArray(0.996039, 1, 0.703872, 1, 0.968418, 0.659739, 0.184875, 1, 0.927686, 0.410388, 0.134392, 0.290196, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_awp2o"]
+gradient = SubResource("Gradient_o7lum")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_47dj4"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = -0.3
+direction = Vector3(0, -20, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 300.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_awp2o")
+turbulence_enabled = true
+turbulence_influence_max = 0.3
+turbulence_initial_displacement_min = -20.0
+turbulence_initial_displacement_max = 20.0
+
 [node name="Animated_Fire" type="AnimatedSprite2D"]
 modulate = Color(0.493211, 0.493211, 0.493211, 1)
 sprite_frames = SubResource("SpriteFrames_le38l")
 autoplay = "default"
-frame_progress = 0.103236
+frame_progress = 0.4805
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = SubResource("GradientTexture2D_s2wy6")
 script = ExtResource("2_o7lum")
 flicker_intensity = 0.1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_o7lum")
+position = Vector2(0, -8)
+amount = 3
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_47dj4")
